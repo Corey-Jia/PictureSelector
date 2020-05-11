@@ -311,6 +311,13 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                     imageSize++;
                 }
             }
+            //corey fix
+            if (config.maxVideoSelectNum > 0
+                    && (videoSize + imageSize) >= config.maxVideoSelectNum && !isChecked) {
+                ToastUtils.s(context, StringUtils.getMsg(context, "最多可以选择" + config.maxSelectNum + "张", config.maxSelectNum));
+                return;
+            }
+
             if (PictureMimeType.eqVideo(image.getMimeType()) && config.maxVideoSelectNum > 0
                     && videoSize >= config.maxVideoSelectNum && !isChecked) {
                 // 如果选择的是视频
